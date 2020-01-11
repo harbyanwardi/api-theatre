@@ -19,8 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',['namespace' => 'App\Http\Controllers'], function ($api){
-    $api->get('users', 'APIUserController@index');
-
     $api->get('movies', 'APIMovieController@index');
    
     $api->post('movies/search', 'APIMovieController@getmovies');
