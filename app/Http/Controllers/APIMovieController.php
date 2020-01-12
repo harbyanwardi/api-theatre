@@ -66,10 +66,19 @@ class APIMovieController extends Controller
         ->select('table_movies.title','table_movies.categories','table_movies.duration','schedules.date', 'schedules.start_time','ticket.price')
         
         ->where('schedules.date', $today)
+        ->groupBy('schedules.id')
         ->get();
 
         if($getData ){
-                return response()->json($getData,200);
+                if((sizeof($getData) == 0)){
+                    return response()->json([
+                        'error' => ['message' => 'Data is empty']
+                    ], 404); 
+                }   
+                else{
+                    return response()->json($getData,200);
+                }         
+                
             }
             else{
                 
@@ -158,7 +167,14 @@ class APIMovieController extends Controller
         ->get();
 
         if($getData ){
-                return response()->json($getData,200);
+                if((sizeof($getData) == 0)){
+                    return response()->json([
+                        'error' => ['message' => 'Data is empty']
+                    ], 404); 
+                }   
+                else{
+                    return response()->json($getData,200);
+                }      
             }
             else{
                 

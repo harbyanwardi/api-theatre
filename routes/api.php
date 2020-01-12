@@ -19,14 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',['namespace' => 'App\Http\Controllers'], function ($api){
+    $api->get('users', 'APIUserController@index');
+
     $api->get('movies', 'APIMovieController@index');
    
-    $api->post('movies/search', 'APIMovieController@getmovies');
-    $api->post('movies/seat', 'APIMovieController@getseat');
-    $api->get('movies/today', 'APIMovieController@getMoviesToday');
+    $api->post('searchmovie', 'APIMovieController@getmovies');
+    $api->post('seat', 'APIMovieController@getseat');
+    $api->get('moviestoday', 'APIMovieController@getMoviesToday');
 
-    $api->post('ticket/price', 'APIMovieController@getPriceTicket');
-    $api->get('ticket/today', 'APIMovieController@getPriceTicketToday');
+    $api->post('ticketprice', 'APIMovieController@getPriceTicket');
+    $api->get('tickettoday', 'APIMovieController@getPriceTicketToday');
    
 
 });
